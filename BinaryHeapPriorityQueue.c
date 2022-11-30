@@ -1,5 +1,3 @@
-// Priority Queue implementation in C using Binary Heap DS
-
 #include <stdio.h>
 int size = 0;
 void swap(int *a, int *b) 
@@ -8,8 +6,6 @@ void swap(int *a, int *b)
   *b = *a;
   *a = temp;
 }
-
-// Function to heapify the tree
 void maxheapify(int array[], int size, int k) 
 {
   if (size == 1) 
@@ -18,7 +14,6 @@ void maxheapify(int array[], int size, int k)
   } 
   else 
   {
-    // Find the largest among root, left child and right child
     int max = k;
     int l = 2 * k;
     int r = 2 * k + 1;
@@ -28,8 +23,6 @@ void maxheapify(int array[], int size, int k)
         max = k;
     if (r < size && array[r] > array[max])
       max = r;
-
-    // Swap and continue heapifying if root is not largest
     if (max!= k) 
     {
       swap(&array[k], &array[max]);
@@ -37,8 +30,6 @@ void maxheapify(int array[], int size, int k)
     }
   }
 }
-
-// Function to insert an element into the tree
 void insert(int array[], int newNum) 
 {
   if (size == 0) 
@@ -56,8 +47,6 @@ void insert(int array[], int newNum)
     }
   }
 }
-
-// Function to delete an element from the tree
 void deleteRoot(int array[], int num) //buildmaxheap
 {
   int i;
@@ -73,16 +62,12 @@ void deleteRoot(int array[], int num) //buildmaxheap
     maxheapify(array, size, i);
   }
 }
-
-// Print the array
 void printArray(int array[], int size) 
 {
   for (int i = 0; i < size; ++i)
     printf("%d ", array[i]);
   printf("\n");
 }
-
-// Driver code
 int main() 
 {
   int array[10];
