@@ -31,7 +31,7 @@ void MergeSort(int A[],int l,int h)
 int main()
 {
     int n,i;
-    printf ("\nEnter the number of array elements to be inputted:");
+    printf ("\nEnter the number of array elements to be inputed:");
         scanf ("%d",&n);
     int A[n];
     printf ("\nEnter %d Elements:",n);
