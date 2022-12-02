@@ -65,7 +65,7 @@ int main()
     printf ("\nThe 2nd Polynomial is:");
         display (p2);
     p3 = add(&p1, &p2);
-    printf ("\nThe Final added Polynomial is:");
+    printf ("\nThe Resultant Polynomial is:");
         display (*p3);
     return 1;
 }
