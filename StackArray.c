@@ -25,10 +25,7 @@ int stack[size], top=0, choice, element;
     int pop()
     {
         if (isempty())
-        {
-            printf("\nStack is Empty");
             return -1;
-        }
         else
         {
             top=top-1;
@@ -54,7 +51,7 @@ int stack[size], top=0, choice, element;
     }
 void main()
 {
-    int a=0,b,choice;
+    int a=0,b,c,choice;
     do
     {
         printf("\n--------Menu--------");
@@ -63,18 +60,15 @@ void main()
         scanf("%d",&choice);
         switch(choice)
         {
-            case 1: if(!isfull())
-                    {
-                        printf("\nEnter the element to be pushed:");
+            case 1: printf("\nEnter the element to be pushed:");
                         scanf("%d",&element);
                         push(element);
-                    }            
                     break;
-            case 2: if (!isempty())
-                    {
-                        element=pop();
-                        printf("\nPopped Element is %d",element);
-                    }
+            case 2: element=pop();
+                        if(element==-1)
+                            printf ("Stack is Empty, Cannot Pop Values");
+                        else
+                            printf("\nPopped Element is %d",x);
                     break;
             case 3: a=peek();
                     if(a!=0)
