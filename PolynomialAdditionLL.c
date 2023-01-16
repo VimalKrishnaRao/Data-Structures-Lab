@@ -31,6 +31,7 @@ void print(node *a)
         }
     }
 }
+
 node *read(node *a)
 {
     int ch;
@@ -46,10 +47,12 @@ node *read(node *a)
         if (a==NULL)
         {
             a=p;
+            curr=p;
         }
         else
         {
-            a->next=p;
+            curr->next=p;
+            curr=p;
         }
         printf("Do you wanna continue(1,0): ");
         scanf("%d",&ch);
@@ -73,6 +76,8 @@ void Addpoly()
             p3->expo=p1->expo;
             p1=p1->next;
             p2=p2->next;
+            p3->next=newnode(); // create a new node for result polynomial
+            p3=p3->next;
         }
         else
         {
@@ -88,10 +93,7 @@ void Addpoly()
                 p3->coef=p2->coef;
                 p2=p2->next;
             }
-        }
-        if(p1!=NULL && p2!=NULL)
-        {
-            p3->next=newnode();
+            p3->next=newnode(); // create a new node for result polynomial
             p3=p3->next;
         }
     }
@@ -112,6 +114,7 @@ void Addpoly()
         p2=p2->next;
     }
 }
+
 void main()
 {
     poly1=read(poly1);
