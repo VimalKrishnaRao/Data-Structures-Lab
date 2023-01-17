@@ -20,27 +20,17 @@ struct node *newNode(int data)
 
 void insert(struct node *root, int data) 
 {
-  if (data < root->data) 
+  if (root->left == NULL) 
   {
-    if (root->left == NULL) 
-    {
-        root->left = newNode(data);
-    } 
-    else 
-    {
-        insert(root->left, data);
-    }
+    root->left = newNode(data);
+  } 
+  else if(root->right == NULL)
+  {
+    root->right = newNode(data);
   }
-  else 
+  else
   {
-    if (root->right == NULL) 
-    {
-        root->right = newNode(data);
-    }
-    else 
-    {
-        insert(root->right, data);
-    }
+    insert(root->left, data);
   }
 }
 
@@ -74,27 +64,12 @@ void postorder(struct node *root)
   printf("%d ", root->data);
 }
 
-struct node *findMinNode(struct node *root) 
-{
-  while (root->left != NULL) 
-    root = root->left;
-  return root;
-}
-
 struct node *deleteNode(struct node *root, int data) 
 {
   if (root == NULL) 
     return root;
 
-  if (data < root->data) 
-  {
-    root->left = deleteNode(root->left, data);
-  } 
-  else if (data > root->data) 
-  {
-    root->right = deleteNode(root->right, data);
-  } 
-  else 
+  if (root->data == data) 
   {
     if (root->left == NULL) 
     {
@@ -108,10 +83,11 @@ struct node *deleteNode(struct node *root, int data)
       free(root);
       return temp;
     }
-
-    struct node *temp = findMinNode(root->right);
-    root->data = temp->data;
-    root->right = deleteNode(root->right, temp->data);
+  }
+  else
+  {
+    root->left = deleteNode(root->left, data);
+    root->right = deleteNode(root->right, data);
   }
   return root;
 }
@@ -138,7 +114,7 @@ int main()
       printf("Enter the data to be inserted: ");
       scanf("%d", &data);
 
-      if (root == NULL) 
+      if (root == NULL)
       {
         root = newNode(data);
       } 
@@ -164,17 +140,22 @@ int main()
       printf("Postorder traversal: ");
       postorder(root);
       printf("\n");
-    } 
+    }
     else if (choice == 5) 
     {
       printf("Enter the data to be deleted: ");
       scanf("%d", &data);
       root = deleteNode(root, data);
     } 
-    else 
+    else if (choice == 6) 
     {
       break;
+    } 
+    else 
+    {
+      printf("Invalid choice. Please try again.\n");
     }
   }
+
   return 0;
 }
