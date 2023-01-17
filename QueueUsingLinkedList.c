@@ -1,5 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <stdbool.h>
+#include <stddef.h>
+
 struct Node
 {
     int info;
@@ -15,7 +18,7 @@ node *newnode(int val)
     p->next = NULL;
     return p;
 }
-void Insert_rear(int ele)
+void enqueue_LL(int ele)
 {
     p=newnode(ele);
     if(F==NULL)
@@ -24,42 +27,16 @@ void Insert_rear(int ele)
         R->next=p;
     R=p;
 }
-void Insert_front(int ele)
-{
-    p=newnode(ele);
-    if(F==NULL)
-        F=R=p;
-    else
-    {
-        p->next=F;
-        F=p;
-    }
-}
-int Delete_rear()
-{
-    int ele = R->info;
-    curr=F;
-    if(F==R)
-        F=R=NULL;
-    else
-    {
-        while (curr->next!=NULL)
-        {
-            prev=curr;
-            curr=curr->next;
-        }
-        R=prev;
-        prev->next=NULL;
-    }
-    free(curr);
-    return (ele);
-}
-int Delete_front()
+
+int dequeue_LL()
 {
     int ele = F->info;
     curr=F;
     if(F==R)
+    {
         F=R=NULL;
+        return ele;
+    }
     else
     {
         F=F->next;
@@ -70,6 +47,9 @@ int Delete_front()
 void Display()
 {
     curr=F;
+    if(F == NULL){
+        printf("Queue is Empty\n");
+    }
     while (curr->next!=NULL)
     {
         printf("%d\t",curr->info);
@@ -77,37 +57,36 @@ void Display()
     }
     printf("%d\n",curr->info);
 }
-void main()
+int main()
 {
     int ch,ele;
     printf("QUEUE USING LINKED LIST");
     do
     {
-        printf("\n\nChoose:\n1.Insert_Front\n2.Insert_Rear\n3.Delete_Front\n4.Delete_Rear\n5.Display\n6.Exit\n");
+        printf("\n\nChoose:\n1.Enqueue_LL\n2.Dequeue_LL\n3.Display\n4.Exit\n");
         printf("Enter your choice: ");
         scanf("%d",&ch);
         switch(ch)
         {
             case 1: printf("\nEnter the number to be Inserted : ");
-                    scanf("%d",&ele);
-                    Insert_front(ele);
+            scanf("%d",&ele);
+            enqueue_LL(ele);
+            break;
+            case 2: if(F == NULL)
+                        printf("Queue is Empty\n");
+                    else
+                    {
+                        ele = dequeue_LL();
+                        printf("\nDequeued: %d",ele);
+                    }
                     break;
-            case 2: printf("\nEnter the number to be Inserted : ");
-                    scanf("%d",&ele);
-                    Insert_rear(ele);
-                    break;
-            case 3: ele = Delete_front();
-                    printf("\nThe Deleted value is %d",ele);
-                    break;
-            case 4: ele = Delete_rear();
-                    printf("\nThe Deleted value is %d",ele);
-                    break;
-            case 5: printf("\nThe Elements in the Stack :\n");
+            case 3: printf("\nThe Elements in the Queue :\n");
                     Display();
                     break;
-            case 6: break;
-            default : printf("\nINVALID");
+            case 4: break;
+            default : printf("\nINVALID CHOICE");
         }
     }
-    while(ch!=6);
+    while(ch!=4);
+    return 0;
 }
